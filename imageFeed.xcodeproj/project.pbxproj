@@ -13,6 +13,9 @@
 		FA20436229B5E01E005B617A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA20436029B5E01E005B617A /* Main.storyboard */; };
 		FA20436429B5E024005B617A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA20436329B5E024005B617A /* Assets.xcassets */; };
 		FA20436729B5E024005B617A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA20436529B5E024005B617A /* LaunchScreen.storyboard */; };
+		FAB82A1929E666C9006CB888 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB82A1829E666C9006CB888 /* ProfileViewController.swift */; };
+		FAB82A1B29E841B0006CB888 /* extensionColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB82A1A29E841B0006CB888 /* extensionColor.swift */; };
+		FACC320229EA58DA00D84BF0 /* SingleImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACC320129EA58DA00D84BF0 /* SingleImageViewController.swift */; };
 		FAE6775C29D04AB700BF515C /* ImagesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE6775B29D04AB700BF515C /* ImagesListCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +28,9 @@
 		FA20436329B5E024005B617A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FA20436629B5E024005B617A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FA20436829B5E024005B617A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FAB82A1829E666C9006CB888 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		FAB82A1A29E841B0006CB888 /* extensionColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensionColor.swift; sourceTree = "<group>"; };
+		FACC320129EA58DA00D84BF0 /* SingleImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleImageViewController.swift; sourceTree = "<group>"; };
 		FAE6775B29D04AB700BF515C /* ImagesListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -42,6 +48,7 @@
 		FA20434E29B5E01E005B617A = {
 			isa = PBXGroup;
 			children = (
+				FAB82A1729E6667D006CB888 /* Profile */,
 				FA20435929B5E01E005B617A /* imageFeed */,
 				FA20435829B5E01E005B617A /* Products */,
 			);
@@ -58,6 +65,7 @@
 		FA20435929B5E01E005B617A /* imageFeed */ = {
 			isa = PBXGroup;
 			children = (
+				FAB82A1A29E841B0006CB888 /* extensionColor.swift */,
 				FA20435A29B5E01E005B617A /* AppDelegate.swift */,
 				FA20435C29B5E01E005B617A /* SceneDelegate.swift */,
 				FAE6775D29D04B2200BF515C /* ImagesList */,
@@ -69,11 +77,20 @@
 			path = imageFeed;
 			sourceTree = "<group>";
 		};
+		FAB82A1729E6667D006CB888 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				FAB82A1829E666C9006CB888 /* ProfileViewController.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		FAE6775D29D04B2200BF515C /* ImagesList */ = {
 			isa = PBXGroup;
 			children = (
 				FAE6775B29D04AB700BF515C /* ImagesListCell.swift */,
 				FA20435E29B5E01E005B617A /* ImagesListViewController.swift */,
+				FACC320129EA58DA00D84BF0 /* SingleImageViewController.swift */,
 			);
 			path = ImagesList;
 			sourceTree = "<group>";
@@ -151,8 +168,11 @@
 			files = (
 				FA20435F29B5E01E005B617A /* ImagesListViewController.swift in Sources */,
 				FAE6775C29D04AB700BF515C /* ImagesListCell.swift in Sources */,
+				FAB82A1929E666C9006CB888 /* ProfileViewController.swift in Sources */,
+				FACC320229EA58DA00D84BF0 /* SingleImageViewController.swift in Sources */,
 				FA20435B29B5E01E005B617A /* AppDelegate.swift in Sources */,
 				FA20435D29B5E01E005B617A /* SceneDelegate.swift in Sources */,
+				FAB82A1B29E841B0006CB888 /* extensionColor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
