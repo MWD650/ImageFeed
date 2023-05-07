@@ -23,7 +23,7 @@
 		FAB65D462A018E07002BA70F /* OAuth2Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB65D452A018E07002BA70F /* OAuth2Service.swift */; };
 		FAB65D482A018E79002BA70F /* OAuth2TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB65D472A018E79002BA70F /* OAuth2TokenStorage.swift */; };
 		FAB82A1929E666C9006CB888 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB82A1829E666C9006CB888 /* ProfileViewController.swift */; };
-		FAB82A1B29E841B0006CB888 /* extensionColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB82A1A29E841B0006CB888 /* extensionColor.swift */; };
+		FAB82A1B29E841B0006CB888 /* ExtensionColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB82A1A29E841B0006CB888 /* ExtensionColor.swift */; };
 		FACC320229EA58DA00D84BF0 /* SingleImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACC320129EA58DA00D84BF0 /* SingleImageViewController.swift */; };
 		FAE6775C29D04AB700BF515C /* ImagesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE6775B29D04AB700BF515C /* ImagesListCell.swift */; };
 /* End PBXBuildFile section */
@@ -47,7 +47,7 @@
 		FAB65D452A018E07002BA70F /* OAuth2Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2Service.swift; sourceTree = "<group>"; };
 		FAB65D472A018E79002BA70F /* OAuth2TokenStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2TokenStorage.swift; sourceTree = "<group>"; };
 		FAB82A1829E666C9006CB888 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		FAB82A1A29E841B0006CB888 /* extensionColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensionColor.swift; sourceTree = "<group>"; };
+		FAB82A1A29E841B0006CB888 /* ExtensionColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionColor.swift; sourceTree = "<group>"; };
 		FACC320129EA58DA00D84BF0 /* SingleImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleImageViewController.swift; sourceTree = "<group>"; };
 		FAE6775B29D04AB700BF515C /* ImagesListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -86,7 +86,7 @@
 				FAB65D442A018C7F002BA70F /* Services */,
 				FAB82A1729E6667D006CB888 /* Profile */,
 				FAB65D3B29F9B98D002BA70F /* Constants.swift */,
-				FAB82A1A29E841B0006CB888 /* extensionColor.swift */,
+				FAB82A1A29E841B0006CB888 /* ExtensionColor.swift */,
 				FA20435A29B5E01E005B617A /* AppDelegate.swift */,
 				FA20435C29B5E01E005B617A /* SceneDelegate.swift */,
 				FA9054F32A02DA6D0068D214 /* SplashViewController */,
@@ -170,6 +170,8 @@
 			dependencies = (
 			);
 			name = imageFeed;
+			packageProductDependencies = (
+			);
 			productName = imageFeed;
 			productReference = FA20435729B5E01E005B617A /* imageFeed.app */;
 			productType = "com.apple.product-type.application";
@@ -198,6 +200,8 @@
 				Base,
 			);
 			mainGroup = FA20434E29B5E01E005B617A;
+			packageReferences = (
+			);
 			productRefGroup = FA20435829B5E01E005B617A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -235,7 +239,7 @@
 				FA20435B29B5E01E005B617A /* AppDelegate.swift in Sources */,
 				FA20435D29B5E01E005B617A /* SceneDelegate.swift in Sources */,
 				FAB65D4329FD00DE002BA70F /* WebViewViewControllerDelegate.swift in Sources */,
-				FAB82A1B29E841B0006CB888 /* extensionColor.swift in Sources */,
+				FAB82A1B29E841B0006CB888 /* ExtensionColor.swift in Sources */,
 				FAB65D3E29FB08B8002BA70F /* AuthViewController.swift in Sources */,
 				FAB65D482A018E79002BA70F /* OAuth2TokenStorage.swift in Sources */,
 				FAB65D3C29F9B98D002BA70F /* Constants.swift in Sources */,
