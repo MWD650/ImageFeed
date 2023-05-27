@@ -6,15 +6,16 @@
 //
 
 
-import UIKit
+import Foundation
+import SwiftKeychainWrapper
 
 final class OAuth2TokenStorage {
-    private let storage = UserDefaults.standard
+    private let storage = KeychainWrapper.standard
     private let keyStorage = "bearer"
-    
+
     var token: String? {
         get {
-            storage.string(forKey: keyStorage)
+            return storage.string(forKey: keyStorage)
         }
         set {
             if let data = newValue {
@@ -23,5 +24,10 @@ final class OAuth2TokenStorage {
                 storage.removeObject(forKey: keyStorage)
             }
         }
+        
+
     }
+    func removeToken() {
+            storage.removeObject(forKey: keyStorage)
+        }
 }

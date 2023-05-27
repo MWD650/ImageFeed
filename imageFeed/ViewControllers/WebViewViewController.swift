@@ -10,41 +10,67 @@ import WebKit
 
 final class WebViewViewController: UIViewController {
     
-    @IBOutlet private weak var webView: WKWebView!
+    private var estimatedProgressObservation: NSKeyValueObservation?
+    weak var delegate: WebViewViewControllerDelegate?
     
-    @IBAction private func didTapBackButton(_ sender: Any?) {
+    @objc private func didTapBackButton() {
         delegate?.webViewViewControllerDidCancel(self)
     }
     
-    @IBOutlet private weak var progressView: UIProgressView!
+    private lazy var backButton: UIButton = {
+        let button = UIButton()
+        button.addTarget(self, action: #selector(didTapBackButton), for: .touchUpInside)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
+        button.setImage(UIImage(named: "nav_back_button"), for: .normal)
+        return button
+    }()
     
-    weak var delegate: WebViewViewControllerDelegate?
+    private lazy var webView: WKWebView = {
+        let webView = WKWebView()
+        return webView
+    }()
+    
+    private lazy var progressView: UIProgressView = {
+        let progressView = UIProgressView()
+        progressView.progressViewStyle = .default
+        progressView.progressTintColor = .ypBlack
+        return progressView
+    }()
+    
+    private func createViews() {
+        view.backgroundColor = .ypWhite
+    }
+    
+    private func addSubviews() {
+        [webView, backButton, progressView].forEach { item in
+            item.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview(item)
+        }
+    }
+    
+    // MARK: - LifeCycleу
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         webView.navigationDelegate = self
         downloadWebContent()
-    }
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+        createViews()
+        addSubviews()
+        addConstraints()
         
-        webView.addObserver(
-            self,
-            forKeyPath: #keyPath(WKWebView.estimatedProgress),
-            options: .new,
-            context: nil)
-        updateProgress()
+        estimatedProgressObservation = webView.observe(
+            \.estimatedProgress,
+             options: [],
+             changeHandler: { [weak self] _, _ in
+                 guard let self = self else { return }
+                 self.updateProgress()
+             })
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        webView.removeObserver(
-            self,
-            forKeyPath: #keyPath(WKWebView.estimatedProgress),
-            context: nil
-        )
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        updateProgress()
     }
     
     override func observeValue(
@@ -110,5 +136,26 @@ extension WebViewViewController: WKNavigationDelegate {
         } else {
             return nil
         }
+    }
+}
+// MARK: - Set Constraints
+
+extension WebViewViewController {
+    private func addConstraints() {
+        NSLayoutConstraint.activate([
+            webView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            webView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            webView.topAnchor.constraint(equalTo: progressView.bottomAnchor),
+            webView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            backButton.heightAnchor.constraint(equalToConstant: 24),
+            backButton.widthAnchor.constraint(equalToConstant: 24),
+            backButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 9),
+            backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 9),
+            
+            progressView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            progressView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            progressView.topAnchor.constraint(equalTo: backButton.bottomAnchor),
+        ])
     }
 }
