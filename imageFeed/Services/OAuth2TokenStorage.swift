@@ -1,17 +1,17 @@
+////
+////  OAuth2TokenStorage.swift
+////  imageFeed
+////
+////  Created by Alex on /25/23.
+////
 //
-//  OAuth2TokenStorage.swift
-//  imageFeed
 //
-//  Created by Alex on /25/23.
-//
-
-
 import Foundation
 import SwiftKeychainWrapper
 
 final class OAuth2TokenStorage {
     private let storage = KeychainWrapper.standard
-    private let keyStorage = "bearer"
+    private let keyStorage = "API.bearerKey"
 
     var token: String? {
         get {
@@ -24,10 +24,6 @@ final class OAuth2TokenStorage {
                 storage.removeObject(forKey: keyStorage)
             }
         }
-        
 
     }
-    func removeToken() {
-            storage.removeObject(forKey: keyStorage)
-        }
 }

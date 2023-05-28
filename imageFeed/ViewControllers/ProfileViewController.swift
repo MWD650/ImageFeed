@@ -44,7 +44,6 @@ final class ProfileViewController: UIViewController {
     
     private let profileService = ProfileService.shared
     private var profileImageServiceObserver: NSObjectProtocol?
-    //private let removeToken = OAuth2TokenStorage()
     private let oauth2TokenStorage = OAuth2TokenStorage()
     
     
@@ -87,20 +86,9 @@ final class ProfileViewController: UIViewController {
             title: "Да",
             style: .destructive
         ) { [weak self] _ in
-            // удалить текущий токен
-            print(OAuth2TokenStorage().token)
-            OAuth2TokenStorage().removeToken()
-           // OAuth2Service().lastCode = nil
-            //OAuth2TokenStorage().token = nil // вызов функции removeToken()
-            print(OAuth2TokenStorage().token)
-                 
-            if let cookies = HTTPCookieStorage.shared.cookies {
-                for cookie in cookies {
-                    HTTPCookieStorage.shared.deleteCookie(cookie)
-                }
-            }
-           // self!.removeToken.removeToken()
-            // перенести на экран SplashViewController
+                
+            OAuth2TokenStorage().token = nil
+                   
             let authVC = SplashViewController()
             let navigationController = UINavigationController(rootViewController: authVC)
             navigationController.modalPresentationStyle = .fullScreen

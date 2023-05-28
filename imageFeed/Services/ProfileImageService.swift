@@ -22,7 +22,10 @@ final class ProfileImageService {
             return
         }
         
-        var request = URLRequest.makeHTTPRequest(path: "/users/\(username)", httpMethod: "GET")
+        guard var request = URLRequest.makeHTTPRequest(path: "/users/\(username)", httpMethod: "GET") else {
+            return
+        }
+        
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         
         let task = urlSession.objectTask(for: request) { [weak self] (result: Result<ProfileImage, Error>) in
@@ -42,3 +45,4 @@ final class ProfileImageService {
         
     }
 }
+

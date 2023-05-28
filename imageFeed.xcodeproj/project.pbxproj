@@ -28,7 +28,6 @@
 		FA90550D2A0C62FA0068D214 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA90550C2A0C62FA0068D214 /* Profile.swift */; };
 		FA90550F2A0C64270068D214 /* ProfileResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA90550E2A0C64270068D214 /* ProfileResult.swift */; };
 		FA9055112A0C64710068D214 /* ProfileImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9055102A0C64710068D214 /* ProfileImage.swift */; };
-		FA9055132A104EFC0068D214 /* OAuth2ServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9055122A104EFC0068D214 /* OAuth2ServiceProtocol.swift */; };
 		FAB65D3C29F9B98D002BA70F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB65D3B29F9B98D002BA70F /* Constants.swift */; };
 		FAB65D3E29FB08B8002BA70F /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB65D3D29FB08B8002BA70F /* AuthViewController.swift */; };
 		FAB65D4129FBACF4002BA70F /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB65D4029FBACF4002BA70F /* WebViewViewController.swift */; };
@@ -62,7 +61,6 @@
 		FA90550C2A0C62FA0068D214 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		FA90550E2A0C64270068D214 /* ProfileResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileResult.swift; sourceTree = "<group>"; };
 		FA9055102A0C64710068D214 /* ProfileImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImage.swift; sourceTree = "<group>"; };
-		FA9055122A104EFC0068D214 /* OAuth2ServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2ServiceProtocol.swift; sourceTree = "<group>"; };
 		FAB65D3B29F9B98D002BA70F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		FAB65D3D29FB08B8002BA70F /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		FAB65D4029FBACF4002BA70F /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
@@ -185,7 +183,6 @@
 				FA9055032A080BCB0068D214 /* ProfileService.swift */,
 				FA9055082A096E700068D214 /* NetworkError.swift */,
 				FA90550A2A0C593D0068D214 /* ProfileImageService.swift */,
-				FA9055122A104EFC0068D214 /* OAuth2ServiceProtocol.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -289,7 +286,6 @@
 				FA9054F52A02DA880068D214 /* SplashViewController.swift in Sources */,
 				FACC320229EA58DA00D84BF0 /* SingleImageViewController.swift in Sources */,
 				FA20435B29B5E01E005B617A /* AppDelegate.swift in Sources */,
-				FA9055132A104EFC0068D214 /* OAuth2ServiceProtocol.swift in Sources */,
 				FA20435D29B5E01E005B617A /* SceneDelegate.swift in Sources */,
 				FA9055092A096E700068D214 /* NetworkError.swift in Sources */,
 				FAB65D4329FD00DE002BA70F /* WebViewViewControllerDelegate.swift in Sources */,

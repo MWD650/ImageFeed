@@ -5,8 +5,8 @@
 //  Created by Alex on /75/23.
 //
 
-import UIKit
 
+import UIKit
 final class ProfileService {
     
     static let shared = ProfileService()
@@ -23,7 +23,10 @@ final class ProfileService {
             return
         }
         
-        var request = URLRequest.makeHTTPRequest(path: "/me", httpMethod: "GET")
+        guard var request = URLRequest.makeHTTPRequest(path: "/me", httpMethod: "GET") else {
+
+                return
+            }
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         
         let task = urlSession.objectTask(for: request) { [weak self] (result: Result<ProfileResult, Error>) in
@@ -36,7 +39,9 @@ final class ProfileService {
                                        last_name: unsplashProfile.last_name,
                                        bio: bio)
                 UIBlockingProgressHUD.dismiss()
-                completion(.success(self.profile!))
+                if let profile = self.profile {
+                    completion(.success(profile))
+                }
             case .failure(let error):
                 completion(.failure(error))
             }

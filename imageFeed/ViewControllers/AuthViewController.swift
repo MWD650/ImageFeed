@@ -1,4 +1,5 @@
-//
+
+
 //  AuthViewController.swift
 //  imageFeed
 //
@@ -6,51 +7,58 @@
 //
 import UIKit
 
+struct Constants {
+    static let authScreenLogo = "auth_screen_logo"
+}
+
 final class AuthViewController: UIViewController {
     private lazy var logoImageView: UIImageView = {
-          let imageView = UIImageView()
-          imageView.image = UIImage(named: "auth_screen_logo")
-          return imageView
-      }()
-      
-      private lazy var loginButton: UIButton = {
-          let button = UIButton()
-          button.addTarget(self, action: #selector(didTaploginButton), for: .touchUpInside)
-          button.layer.cornerRadius = 16
-          button.setTitle("Войти", for: .normal)
-          button.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .bold)
-          button.setTitleColor(.ypBlack, for: .normal)
-          button.backgroundColor = .ypWhite
-          return button
-      }()
-      
-      weak var delegate: AuthViewControllerDelegate?
-     
-      // MARK: - LifeCycle
-      
-      override func viewDidLoad() {
-          super.viewDidLoad()
-          
-          addSubviews()
-          addConstraints()
-      }
-      
-      @objc private func didTaploginButton() {
-          let webViewViewController = WebViewViewController()
-          webViewViewController.delegate = self
-          
-          webViewViewController.modalPresentationStyle = .fullScreen
-          present(webViewViewController, animated: true)
-      }
-      
-      private func addSubviews() {
-          [logoImageView, loginButton].forEach { item in
-              item.translatesAutoresizingMaskIntoConstraints = false
-              view.addSubview(item)
-          }
-      }
-  }
-
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: Constants.authScreenLogo)
+        return imageView
+    }()
+    
+    private lazy var loginButton: UIButton = {
+        let button = UIButton()
+        setupLoginButton(button)
+        return button
+    }()
+    
+    weak var delegate: AuthViewControllerDelegate?
+    
+    // MARK: - LifeCycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        addSubviews()
+        addConstraints()
+    }
+    
+    @objc private func didTaploginButton() {
+        let webViewViewController = WebViewViewController()
+        webViewViewController.delegate = self
+        
+        webViewViewController.modalPresentationStyle = .fullScreen
+        present(webViewViewController, animated: true)
+    }
+    
+    private func setupLoginButton(_ button: UIButton) {
+        button.addTarget(self, action: #selector(didTaploginButton), for: .touchUpInside)
+        button.layer.cornerRadius = 16
+        button.setTitle("Войти", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .bold)
+        button.setTitleColor(.ypBlack, for: .normal)
+        button.backgroundColor = .ypWhite
+    }
+    
+    private func addSubviews() {
+        [logoImageView, loginButton].forEach { item in
+            item.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview(item)
+        }
+    }
+}
 
 // MARK: - WebViewViewControllerDelegate
 
