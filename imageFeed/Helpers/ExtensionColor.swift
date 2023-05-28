@@ -9,13 +9,13 @@ import UIKit
 
 extension UIColor {
     static var ypBlack: UIColor {
-        return UIColor(named: "ypBlack")!
+        return UIColor(named: "ypBlack") ?? UIColor.black
     }
     static var ypWhite: UIColor {
-        return UIColor(named: "ypWhite")!
+        return UIColor(named: "ypWhite") ?? UIColor.white
     }
     static var ypRed: UIColor {
-        return UIColor(named: "ypRed")!
+        return UIColor(named: "ypRed") ?? UIColor.red
     }
 }
 

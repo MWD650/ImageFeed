@@ -9,21 +9,47 @@ import UIKit
 
 final class ImagesListCell: UITableViewCell {
     
-    @IBOutlet weak var imageCell: UIImageView!
-    @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var likeButton: UIButton!
-    
     private let gradientContainerView = UIView()
     static let reuseIdentifier = "ImagesListCell"
     private let gradientLayer = CAGradientLayer()
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    lazy var imageCell: UIImageView = {
+        let imageView = UIImageView()
+        imageView.layer.cornerRadius = 16
+        imageView.layer.masksToBounds = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    lazy var likeButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    lazy var dateLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .ypWhite
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureGradientLayer()
+        
+        contentView.addSubview(imageCell)
+        contentView.addSubview(likeButton)
+        contentView.addSubview(dateLabel)
         
         gradientContainerView.frame = imageCell.bounds
         gradientContainerView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         imageCell.addSubview(gradientContainerView)
+        addViewConstraints()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
     }
     
     private func configureGradientLayer() {
@@ -36,8 +62,31 @@ final class ImagesListCell: UITableViewCell {
     }
     override func layoutSubviews() {
         super.layoutSubviews()
-        
         gradientLayer.frame = CGRect(x: 0, y: dateLabel.frame.origin.y, width: bounds.width, height: bounds.height - dateLabel.frame.origin.y)
     }
-    
+}
+
+extension ImagesListCell {
+    func addViewConstraints() {
+        NSLayoutConstraint.activate([
+            imageCell.trailingAnchor.constraint(greaterThanOrEqualTo: contentView.trailingAnchor, constant: -16),
+            imageCell.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -4),
+            imageCell.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            imageCell.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 4),
+            
+            gradientContainerView.heightAnchor.constraint(equalToConstant: 30),
+            gradientContainerView.bottomAnchor.constraint(equalTo: imageCell.bottomAnchor),
+            gradientContainerView.trailingAnchor.constraint(equalTo: imageCell.trailingAnchor),
+            gradientContainerView.leadingAnchor.constraint(equalTo: imageCell.leadingAnchor),
+            
+            likeButton.widthAnchor.constraint(equalToConstant: 42),
+            likeButton.heightAnchor.constraint(equalToConstant: 42),
+            likeButton.trailingAnchor.constraint(equalTo: imageCell.trailingAnchor),
+            likeButton.topAnchor.constraint(equalTo: imageCell.topAnchor),
+            
+            dateLabel.trailingAnchor.constraint(greaterThanOrEqualTo: imageCell.trailingAnchor),
+            dateLabel.bottomAnchor.constraint(equalTo: imageCell.bottomAnchor, constant: -8),
+            dateLabel.leadingAnchor.constraint(equalTo: imageCell.leadingAnchor, constant: 8)
+        ])
+    }
 }
