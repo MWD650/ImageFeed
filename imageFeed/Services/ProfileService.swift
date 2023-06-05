@@ -38,7 +38,6 @@ final class ProfileService {
                                        first_name: unsplashProfile.first_name,
                                        last_name: unsplashProfile.last_name,
                                        bio: bio)
-                UIBlockingProgressHUD.dismiss()
                 if let profile = self.profile {
                     completion(.success(profile))
                 }

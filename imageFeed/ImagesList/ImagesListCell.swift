@@ -37,7 +37,16 @@ final class ImagesListCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureGradientLayer()
-        
+
+        setupViews()
+        addViewConstraints()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+    private func setupViews() {
         contentView.addSubview(imageCell)
         contentView.addSubview(likeButton)
         contentView.addSubview(dateLabel)
@@ -45,11 +54,6 @@ final class ImagesListCell: UITableViewCell {
         gradientContainerView.frame = imageCell.bounds
         gradientContainerView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         imageCell.addSubview(gradientContainerView)
-        addViewConstraints()
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
     }
     
     private func configureGradientLayer() {

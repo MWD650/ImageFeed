@@ -11,45 +11,51 @@ extension URLRequest {
     static func makeHTTPRequest(
         path: String,
         httpMethod: String,
-        baseURL: URL = API.defaultBaseURL) -> URLRequest? {
-            guard let url = URL(string: path, relativeTo: baseURL) else {
-                print("Invalid URL string: \(path)")
-                return nil
-            }
+        baseURL: URL? = API.defaultBaseURL) -> URLRequest? {
+                
+                guard let baseURL = baseURL else {
+                    print("baseURL is nil")
+                    return nil
+                }
+                
+                guard let url = URL(string: path, relativeTo: baseURL) else {
+                    print("Invalid URL string: \(path)")
+                    return nil
+                }
             var request = URLRequest(url: url)
             request.httpMethod = httpMethod
             return request
         }
 }
 
-extension URLSession {
-    func data(for request: URLRequest, completion: @escaping (Result<Data, Error>) -> Void) -> URLSessionTask {
-
-        let fulfillCompletion: (Result<Data, Error>) -> Void = { result in
-            DispatchQueue.main.async {
-                completion(result)
-            }
-        }
-
-        let task = dataTask(with: request) { data, responce, error in
-            if let data = data,
-               let responce = responce,
-               let statusCode = (responce as? HTTPURLResponse)?.statusCode {
-                if 200..<300 ~= statusCode {
-                    fulfillCompletion(.success(data))
-                } else {
-                    fulfillCompletion(.failure(NetworkError.httpStatusCode(statusCode)))
-                }
-            } else if let error = error {
-                fulfillCompletion(.failure(NetworkError.urlRequestError(error)))
-            } else {
-                fulfillCompletion(.failure(NetworkError.urlSessionError))
-            }
-        }
-        task.resume()
-        return task
-    }
-}
+//extension URLSession {
+//    func data(for request: URLRequest, completion: @escaping (Result<Data, Error>) -> Void) -> URLSessionTask {
+//
+//        let fulfillCompletion: (Result<Data, Error>) -> Void = { result in
+//            DispatchQueue.main.async {
+//                completion(result)
+//            }
+//        }
+//
+//        let task = dataTask(with: request) { data, responce, error in
+//            if let data = data,
+//               let responce = responce,
+//               let statusCode = (responce as? HTTPURLResponse)?.statusCode {
+//                if 200..<300 ~= statusCode {
+//                    fulfillCompletion(.success(data))
+//                } else {
+//                    fulfillCompletion(.failure(NetworkError.httpStatusCode(statusCode)))
+//                }
+//            } else if let error = error {
+//                fulfillCompletion(.failure(NetworkError.urlRequestError(error)))
+//            } else {
+//                fulfillCompletion(.failure(NetworkError.urlSessionError))
+//            }
+//        }
+//        task.resume()
+//        return task
+//    }
+//}
 
 extension URLSession {
     func objectTask<T: Decodable>(

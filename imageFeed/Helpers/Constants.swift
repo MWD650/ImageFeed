@@ -12,8 +12,10 @@ struct API {
     static let secretKey = "N3lxndJ9EOZlUjqiJQYdmTNco66VLV06DRQmmGf3ffc"
     static let redirectURI = "urn:ietf:wg:oauth:2.0:oob"
     static let accessScope = "public+read_user+write_likes"
-    static let defaultBaseURL = URL(string: "https://api.unsplash.com")!
+    static let defaultBaseURL: URL? = URL(string: "https://api.unsplash.com")
     static let unsplashAuthorizeURLString = "https://unsplash.com/oauth/authorize"
     static let urlToFetchAuthToken = "https://unsplash.com/oauth/token"
     static let bearerKey = "bearer"
 }
+
+
