@@ -7,6 +7,7 @@
 
 import UIKit
 import Kingfisher
+import WebKit
 
 final class ProfileViewController: UIViewController {
     private lazy var avatarImageView: UIImageView = {
@@ -58,7 +59,6 @@ final class ProfileViewController: UIViewController {
         
         setupLayout()
         addConstraints()
-        
         updateProfileDetails(with: profileService.profile)
         
         profileImageServiceObserver = NotificationCenter.default
@@ -70,7 +70,6 @@ final class ProfileViewController: UIViewController {
                     self.updateAvatar()
                 }
         updateAvatar()
-        
     }
     
     // MARK: - Action
@@ -86,9 +85,18 @@ final class ProfileViewController: UIViewController {
             title: "Да",
             style: .destructive
         ) { [weak self] _ in
-                
+            
             OAuth2TokenStorage().token = nil
-                   
+            // Очищаем все куки из хранилища.
+            HTTPCookieStorage.shared.removeCookies(since: Date.distantPast)
+            // Запрашиваем все данные из локального хранилища.
+            WKWebsiteDataStore.default().fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { records in
+                // Массив полученных записей удаляем из хранилища.
+                records.forEach { record in
+                    WKWebsiteDataStore.default().removeData(ofTypes: record.dataTypes, for: [record], completionHandler: {})
+                }
+            }
+            
             let authVC = SplashViewController()
             let navigationController = UINavigationController(rootViewController: authVC)
             navigationController.modalPresentationStyle = .fullScreen
@@ -106,7 +114,6 @@ final class ProfileViewController: UIViewController {
         
         present(alert, animated: true, completion: nil)
     }
-
     
     // MARK: - Private func
     
@@ -136,7 +143,6 @@ final class ProfileViewController: UIViewController {
             item.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview(item)
         }
-        
     }
     
     // MARK: - Supporting methods

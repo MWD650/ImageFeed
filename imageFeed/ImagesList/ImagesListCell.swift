@@ -4,10 +4,12 @@
 //
 //  Created by Alex on /263/23.
 //
-
 import UIKit
+import Kingfisher
 
 final class ImagesListCell: UITableViewCell {
+    
+    weak var delegate: ImagesListCellDelegate?
     
     private let gradientContainerView = UIView()
     static let reuseIdentifier = "ImagesListCell"
@@ -34,16 +36,36 @@ final class ImagesListCell: UITableViewCell {
         return label
     }()
     
+    @objc private func likeButtonClicked(_ sender: Any) {
+        delegate?.ImagesListCellDidTapLike(self)
+    }
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureGradientLayer()
-
+        
         setupViews()
         addViewConstraints()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+    }
+    
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        imageCell.kf.cancelDownloadTask() // Отменяем текущую задачу загрузки
+        imageCell.image = nil // Устанавливаем изображение в nil
+    }
+    
+    func setLike(like: Bool) {
+        if like {
+            likeButton.setImage(UIImage(named: "like_button_on"), for: .normal)
+        } else {
+            likeButton.setImage(UIImage(named: "like_button_off"), for: .normal)
+        }
     }
     
     private func setupViews() {
@@ -54,6 +76,8 @@ final class ImagesListCell: UITableViewCell {
         gradientContainerView.frame = imageCell.bounds
         gradientContainerView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         imageCell.addSubview(gradientContainerView)
+        
+        likeButton.addTarget(self, action: #selector(likeButtonClicked(_:)), for: .touchUpInside)
     }
     
     private func configureGradientLayer() {
@@ -61,7 +85,6 @@ final class ImagesListCell: UITableViewCell {
         gradientLayer.locations = [0, 1]
         gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)
         gradientLayer.endPoint = CGPoint(x: 0.5, y: 1)
-        
         gradientContainerView.layer.addSublayer(gradientLayer)
     }
     override func layoutSubviews() {
