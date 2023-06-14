@@ -9,17 +9,17 @@ import Foundation
 
 struct Profile {
     let username: String
-    let first_name: String
-    let last_name: String
+    let firstName: String
+    let lastName: String?
     let name: String
     let loginName: String
     let bio: String
     
-    init(username: String, first_name: String, last_name: String, bio: String) {
+    init(username: String, firstName: String, lastName: String?, bio: String) {
         self.username = username
-        self.first_name = first_name
-        self.last_name = last_name
-        self.name = "\(first_name) \(last_name)"
+        self.firstName = firstName
+        self.lastName = lastName
+        self.name = "\(firstName) \(lastName ?? "")"
         self.loginName = "@\(username)"
         self.bio = bio
     }

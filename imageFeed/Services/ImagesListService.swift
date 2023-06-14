@@ -54,6 +54,13 @@ class ImagesListService {
         task.resume()
     }
     
+    
+    
+    func clearData() { //очисткf загруженных фото и обнуление счетчика фото
+        photos.removeAll()
+        lastLoadedPage = nil
+    }
+    
     func changeLike(photoId: String, isLike: Bool, _ completion: @escaping (Result<PhotoLikeResult, Error>) -> Void) {
         assert(Thread.isMainThread)
         task?.cancel()

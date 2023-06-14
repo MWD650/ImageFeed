@@ -35,8 +35,8 @@ final class ProfileService {
             case .success(let unsplashProfile):
                 let bio = unsplashProfile.bio ?? ""
                 self.profile = Profile(username: unsplashProfile.username,
-                                       first_name: unsplashProfile.first_name,
-                                       last_name: unsplashProfile.last_name,
+                                       firstName: unsplashProfile.firstName,
+                                       lastName: unsplashProfile.lastName,
                                        bio: bio)
                 if let profile = self.profile {
                     completion(.success(profile))

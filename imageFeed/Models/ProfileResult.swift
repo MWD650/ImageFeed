@@ -8,14 +8,14 @@ import Foundation
 
 struct ProfileResult: Codable {
     let username: String
-    let first_name: String
-    let last_name: String
+    let firstName: String
+    let lastName: String?
     let bio: String?
     
     private enum CodingKeys: String, CodingKey {
         case username = "username"
-        case first_name = "first_name"
-        case last_name = "last_name"
+        case firstName = "first_name"
+        case lastName = "last_name"
         case bio = "bio"
     }
 }

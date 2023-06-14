@@ -32,7 +32,7 @@ final class ProfileImageService {
             guard let self = self else { return }
             switch result {
             case .success(let userResult):
-                let smallImage = userResult.profile_image.small
+                let smallImage = userResult.profileImage.small
                 self.avatarURL = smallImage
                 completion(.success(self.avatarURL!))
             case .failure(let error):

@@ -97,6 +97,8 @@ final class ProfileViewController: UIViewController {
                 }
             }
             
+            ImagesListService.shared.clearData()
+            
             let authVC = SplashViewController()
             let navigationController = UINavigationController(rootViewController: authVC)
             navigationController.modalPresentationStyle = .fullScreen
