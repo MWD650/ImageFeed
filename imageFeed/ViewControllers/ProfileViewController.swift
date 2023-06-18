@@ -9,7 +9,16 @@ import UIKit
 import Kingfisher
 import WebKit
 
-final class ProfileViewController: UIViewController {
+public protocol ProfileViewControllerProtocol: AnyObject {
+    var presenter: ProfilePresenterProtocol? { get set }
+    
+    func updateAvatar()
+}
+
+final class ProfileViewController: UIViewController & ProfileViewControllerProtocol {
+    
+    var presenter: ProfilePresenterProtocol?
+    
     private lazy var avatarImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "Profile_image") ?? UIImage()
@@ -40,11 +49,12 @@ final class ProfileViewController: UIViewController {
         button.setImage(UIImage(named: "logout_button"), for: .normal)
         button.addTarget(self, action: #selector(logoutButtonTapped), for: .touchUpInside)
         button.tintColor = .ypRed
+        button.accessibilityIdentifier = "logoutButton"
         return button
     }()
     
     private let profileService = ProfileService.shared
-    private var profileImageServiceObserver: NSObjectProtocol?
+//    private var profileImageServiceObserver: NSObjectProtocol?
     private let oauth2TokenStorage = OAuth2TokenStorage()
     
     
@@ -61,14 +71,8 @@ final class ProfileViewController: UIViewController {
         addConstraints()
         updateProfileDetails(with: profileService.profile)
         
-        profileImageServiceObserver = NotificationCenter.default
-            .addObserver(
-                forName: ProfileImageService.didChangeNotification,
-                object: nil,
-                queue: .main) { [weak self] _ in
-                    guard let self = self else { return }
-                    self.updateAvatar()
-                }
+        presenter?.viewDidLoad()
+
         updateAvatar()
     }
     
@@ -126,7 +130,7 @@ final class ProfileViewController: UIViewController {
         self.descriptionLabel.text = profile.bio
     }
     
-    private func updateAvatar() {
+    func updateAvatar() {
         guard
             let profileImageURL = ProfileImageService.shared.avatarURL,
             let url = URL(string: profileImageURL)

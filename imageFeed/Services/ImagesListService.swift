@@ -11,6 +11,7 @@ class ImagesListService {
     
     private (set) var photos: [Photo] = [] // Для хранения последовательности всех загруженных из сети фотографий
     static let shared = ImagesListService()
+   // private var lastLoadedPage: Int = 1
     static let DidChangeNotification = Notification.Name(rawValue: "ImagesListServiceDidChange")
     private var task: URLSessionTask? // URLSessionTask текущего сетевого запроса
     private var lastLoadedPage: Int?

@@ -25,6 +25,7 @@ final class AuthViewController: UIViewController {
     }()
     
     weak var delegate: AuthViewControllerDelegate?
+   
     
     // MARK: - LifeCycle
     
@@ -37,6 +38,12 @@ final class AuthViewController: UIViewController {
     
     @objc private func didTaploginButton() {
         let webViewViewController = WebViewViewController()
+        
+        let authHelper = AuthHelper()
+        let webViewPresenter = WebViewPresenter(authHelper: authHelper)
+        webViewViewController.presenter = webViewPresenter
+        webViewPresenter.view = webViewViewController
+        
         webViewViewController.delegate = self
         
         webViewViewController.modalPresentationStyle = .fullScreen
@@ -50,6 +57,7 @@ final class AuthViewController: UIViewController {
         button.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .bold)
         button.setTitleColor(.ypBlack, for: .normal)
         button.backgroundColor = .ypWhite
+        button.accessibilityIdentifier = "Authenticate"
     }
     
     private func addSubviews() {

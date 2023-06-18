@@ -18,15 +18,15 @@ final class OAuth2Service {
         task?.cancel()
         lastCode = code
 
-        guard var urlComponents = URLComponents(string: API.urlToFetchAuthToken) else {
+        guard var urlComponents = URLComponents(string: UrlToFetchAuthToken) else {
             completion(.failure(NSError(domain: "OAuth2Service", code: -1, userInfo: ["description": "Failed to create URL components"])))
             return
         }
 
         urlComponents.queryItems = [
-            .init(name: "client_id", value: API.accessKey),
-            .init(name: "client_secret", value: API.secretKey),
-            .init(name: "redirect_uri", value: API.redirectURI),
+            .init(name: "client_id", value: AccessKey),
+            .init(name: "client_secret", value: SecretKey),
+            .init(name: "redirect_uri", value: RedirectURI),
             .init(name: "code", value: code),
             .init(name: "grant_type", value: "authorization_code")
         ]

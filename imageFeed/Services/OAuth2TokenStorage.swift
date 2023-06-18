@@ -11,7 +11,7 @@ import SwiftKeychainWrapper
 
 final class OAuth2TokenStorage {
     private let storage = KeychainWrapper.standard
-    private let keyStorage = "API.bearerKey"
+    private let keyStorage = "BearerKey"
 
     var token: String? {
         get {

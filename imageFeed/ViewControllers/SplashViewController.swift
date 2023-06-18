@@ -88,7 +88,7 @@ final class SplashViewController: UIViewController {
     }
     
     private func showAlert(with error: Error) {
-        let alert = UIAlertController(title: "Что-то пошло не так(", message: "Не удалось войти в систему", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Что-то пошло не так(", message: "Ошибка: \(error.localizedDescription)", preferredStyle: .alert)
         let action = UIAlertAction(title: "Ок", style: .default) { _ in
             alert.dismiss(animated: true)
         }

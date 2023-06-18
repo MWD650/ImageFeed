@@ -12,7 +12,13 @@ protocol ImagesListCellDelegate: AnyObject {
     func ImagesListCellDidTapLike(_ cell: ImagesListCell)
 }
 
-final class ImagesListViewController: UIViewController {
+public protocol ImagesListViewControllerProtocol: AnyObject {
+    var presenter: ImagesListPresenterProtocol? { get set }
+    func updateTableViewAnimated()
+}
+
+final class ImagesListViewController: UIViewController & ImagesListViewControllerProtocol {
+    var presenter: ImagesListPresenterProtocol? = ImagesListPresenter()
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -50,20 +56,24 @@ final class ImagesListViewController: UIViewController {
         addSubviews()
         addViewConstraints()
         createViews()
-        
-        imagesListServiceObserver = NotificationCenter.default
-            .addObserver(
-                forName: ImagesListService.DidChangeNotification,
-                object: nil,
-                queue: .main
-            ) { [weak self] _ in
-                guard let self = self else { return }
-                self.updateTableViewAnimated()
-            }
+//        imagesListServiceObserver = NotificationCenter.default
+//                    .addObserver(
+//                        forName: ImagesListService.DidChangeNotification,
+//                        object: nil,
+//                        queue: .main
+//                    ) { [weak self] _ in
+//                        guard let self = self else { return }
+//                        self.updateTableViewAnimated()
+//                    }
+       UIBlockingProgressHUD.show()
+    
         imagesListService.fetchPhotosNextPage()
+        
+        presenter?.view = self
+        presenter?.viewDidLoad()
     }
     
-    private func updateTableViewAnimated() {
+    func updateTableViewAnimated() {
         let oldCount = photos.count
         let newCount = imagesListService.photos.count
         photos = imagesListService.photos

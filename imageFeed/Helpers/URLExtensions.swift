@@ -11,7 +11,7 @@ extension URLRequest {
     static func makeHTTPRequest(
         path: String,
         httpMethod: String,
-        baseURL: URL? = API.defaultBaseURL) -> URLRequest? {
+        baseURL: URL? = DefaultBaseURL) -> URLRequest? {
                 
                 guard let baseURL = baseURL else {
                     print("baseURL is nil")
