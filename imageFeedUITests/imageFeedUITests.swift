@@ -91,7 +91,7 @@ class imageFeedUITests: XCTestCase {
         // тестируем сценарий профиля
         sleep(5)
         app.tabBars.buttons.element(boundBy: 1).tap()
-        sleep(2)
+        sleep(5)
         XCTAssertTrue(app.staticTexts["Alexander"].exists)
         sleep(2)
         XCTAssertTrue(app.staticTexts["@mwd650"].exists)

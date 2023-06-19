@@ -19,7 +19,12 @@ struct Profile {
         self.username = username
         self.firstName = firstName
         self.lastName = lastName
-        self.name = "\(firstName) \(lastName ?? "")"
+        //self.name = "\(firstName) \(lastName ?? "")"
+        if let lastName = lastName, !lastName.isEmpty {
+               self.name = "\(firstName) \(lastName)"
+           } else {
+               self.name = firstName
+           }
         self.loginName = "@\(username)"
         self.bio = bio
     }

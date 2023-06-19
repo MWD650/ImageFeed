@@ -41,6 +41,7 @@ final class ProfileViewController: UIViewController & ProfileViewControllerProto
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
         applyStyleLabel(label, text: "Екатерина Новикова", font: UIFont.systemFont(ofSize: 23, weight: .bold))
+       // nameLabel.accessibilityIdentifier = "Alexander"
         return label
     }()
     
