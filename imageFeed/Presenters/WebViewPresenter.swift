@@ -17,11 +17,11 @@ public protocol WebViewPresenterProtocol {
 final class WebViewPresenter: WebViewPresenterProtocol {
     
     weak var view: WebViewViewControllerProtocol?
-    var authHelper: AuthHelperProtocol
+    private let authHelper: AuthHelperProtocol
     
     init(authHelper: AuthHelperProtocol) {
-            self.authHelper = authHelper
-        }
+        self.authHelper = authHelper
+    }
     
     func viewDidLoad() {
         
@@ -43,9 +43,9 @@ final class WebViewPresenter: WebViewPresenterProtocol {
         abs(value - 1.0) <= 0.0001
     }
     
-           
-        func code(from url: URL) -> String? {
-                authHelper.code(from: url)
-            }
+    
+    func code(from url: URL) -> String? {
+        authHelper.code(from: url)
+    }
     
 } 

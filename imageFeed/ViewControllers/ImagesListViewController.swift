@@ -29,7 +29,7 @@ final class ImagesListViewController: UIViewController & ImagesListViewControlle
         tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
         return tableView
     }()
-
+    
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .long
@@ -56,17 +56,8 @@ final class ImagesListViewController: UIViewController & ImagesListViewControlle
         addSubviews()
         addViewConstraints()
         createViews()
-//        imagesListServiceObserver = NotificationCenter.default
-//                    .addObserver(
-//                        forName: ImagesListService.DidChangeNotification,
-//                        object: nil,
-//                        queue: .main
-//                    ) { [weak self] _ in
-//                        guard let self = self else { return }
-//                        self.updateTableViewAnimated()
-//                    }
-       UIBlockingProgressHUD.show()
-    
+        UIBlockingProgressHUD.show()
+        
         imagesListService.fetchPhotosNextPage()
         
         presenter?.view = self
@@ -154,7 +145,7 @@ extension ImagesListViewController: UITableViewDataSource {
         let photo = photos[indexPath.row]
         guard let urlString = photo.thumbImageURL, let url = URL(string: urlString) else {
             print("Invalid URL string: \(photo.thumbImageURL ?? "nil")")
-            cell.imageCell.image = UIImage(named: "placeholder_image") 
+            cell.imageCell.image = UIImage(named: "placeholder_image")
             return
         }
         
@@ -164,7 +155,7 @@ extension ImagesListViewController: UITableViewDataSource {
         if let date = isoDateFormatter.date(from: photo.createdAt) {
             cell.dateLabel.text = dateFormatter.string(from: date)
         } else {
-            cell.dateLabel.text = "date error"
+            cell.dateLabel.text = ""
         }
         
         cell.likeButton.setImage(UIImage(named: photo.isLiked ? "like_button_on" : "like_button_off"), for: .normal)

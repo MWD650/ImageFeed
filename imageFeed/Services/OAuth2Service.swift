@@ -11,22 +11,22 @@ final class OAuth2Service {
 
     private let urlSession = URLSession.shared
     private var task: URLSessionTask?
-    var lastCode: String?
+    private var lastCode: String?
     func fetchAuthToken(_ code: String, completion: @escaping (Result<OAuthTokenResponseBody, Error>) -> Void) {
         assert(Thread.isMainThread)
         if lastCode == code { return }
         task?.cancel()
         lastCode = code
 
-        guard var urlComponents = URLComponents(string: UrlToFetchAuthToken) else {
+        guard var urlComponents = URLComponents(string: API.urlToFetchAuthToken) else {
             completion(.failure(NSError(domain: "OAuth2Service", code: -1, userInfo: ["description": "Failed to create URL components"])))
             return
         }
 
         urlComponents.queryItems = [
-            .init(name: "client_id", value: AccessKey),
-            .init(name: "client_secret", value: SecretKey),
-            .init(name: "redirect_uri", value: RedirectURI),
+            .init(name: "client_id", value: API.accessKey),
+            .init(name: "client_secret", value: API.secretKey),
+            .init(name: "redirect_uri", value: API.redirectURI),
             .init(name: "code", value: code),
             .init(name: "grant_type", value: "authorization_code")
         ]

@@ -16,18 +16,17 @@ public protocol ImagesListPresenterProtocol {
 final class ImagesListPresenter: ImagesListPresenterProtocol {
     weak var view: ImagesListViewControllerProtocol?
     private var imagesListServiceObserver: NSObjectProtocol?
-    let imagesListService = ImagesListService.shared
+    private let imagesListService = ImagesListService.shared
     
     func viewDidLoad() {
         imagesListServiceObserver = NotificationCenter.default
             .addObserver(
-                forName: ImagesListService.DidChangeNotification,
+                forName: ImagesListService.didChangeNotification,
                 object: nil,
                 queue: .main
             ) { [weak self] _ in
                 guard let self = self else { return }
                 UIBlockingProgressHUD.dismiss()
-                // print("Notification received!") // Debug print
                 self.view?.updateTableViewAnimated()
             }
     }

@@ -12,6 +12,9 @@ struct Constants {
 }
 
 final class AuthViewController: UIViewController {
+    
+    weak var delegate: AuthViewControllerDelegate?
+    
     private lazy var logoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: Constants.authScreenLogo)
@@ -23,9 +26,6 @@ final class AuthViewController: UIViewController {
         setupLoginButton(button)
         return button
     }()
-    
-    weak var delegate: AuthViewControllerDelegate?
-   
     
     // MARK: - LifeCycle
     

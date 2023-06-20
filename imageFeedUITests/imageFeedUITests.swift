@@ -7,7 +7,11 @@
 
 import XCTest
 
-class imageFeedUITests: XCTestCase {
+final class imageFeedUITests: XCTestCase {
+    
+   private let logIn:String = "ваш логин"
+   private let passWord:String = "ваш пароль"
+    
     private let app = XCUIApplication() // переменная приложения
     
     override func setUpWithError() throws {
@@ -29,7 +33,7 @@ class imageFeedUITests: XCTestCase {
         XCTAssertTrue(loginTextField.waitForExistence(timeout: 5))
         
         loginTextField.tap()
-        loginTextField.typeText("ваш логин")
+        loginTextField.typeText(logIn)
         webView.swipeUp()
         app.toolbars["Toolbar"].buttons["Done"].tap()
         
@@ -39,7 +43,7 @@ class imageFeedUITests: XCTestCase {
 
         passwordTextField.tap()
        // sleep(3)
-        passwordTextField.typeText ("пароль")
+        passwordTextField.typeText (passWord)
 
         webView.swipeUp()
         app.toolbars["Toolbar"].buttons["Done"].tap()
@@ -99,5 +103,8 @@ class imageFeedUITests: XCTestCase {
         app.buttons["logoutButton"].tap()
         
         app.alerts["Logout"].scrollViews.otherElements.buttons["Да"].tap()
+        
+        let webView = app.webViews["UnsplashWebView"] //
+        webView.waitForExistence(timeout: 5)
     }
 } 

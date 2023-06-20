@@ -7,12 +7,11 @@
 
 import UIKit
 
-class ImagesListService {
+final class ImagesListService {
     
     private (set) var photos: [Photo] = [] // Для хранения последовательности всех загруженных из сети фотографий
     static let shared = ImagesListService()
-   // private var lastLoadedPage: Int = 1
-    static let DidChangeNotification = Notification.Name(rawValue: "ImagesListServiceDidChange")
+    static let didChangeNotification = Notification.Name(rawValue: "ImagesListServiceDidChange")
     private var task: URLSessionTask? // URLSessionTask текущего сетевого запроса
     private var lastLoadedPage: Int?
     private let oAuthTokenStorage = OAuth2TokenStorage()
@@ -44,18 +43,24 @@ class ImagesListService {
             case .success(let photoResult):
                 self.fetchPhoto(photoResult)
                 NotificationCenter.default.post(
-                    name: ImagesListService.DidChangeNotification,
+                    name: ImagesListService.didChangeNotification,
                     object: self,
                     userInfo: ["photos": self.photos])
-            case .failure(_):
-                break
+            case .failure(let error):
+                self.showAlert(with: error)
             }
         })
         self.task = task
         task.resume()
     }
     
-    
+    private func showAlert(with error: Error) {
+        let alert = UIAlertController(title: "Что-то пошло не так(", message: "Ошибка: \(error.localizedDescription)", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Ок", style: .default) { _ in
+            alert.dismiss(animated: true)
+        }
+        alert.addAction(action)
+    }
     
     func clearData() { //очисткf загруженных фото и обнуление счетчика фото
         photos.removeAll()

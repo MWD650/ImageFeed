@@ -66,12 +66,12 @@ final class SingleImageViewController: UIViewController {
     }
     
     @objc private func didTapShareButton(_ sender: UIButton) {
-        guard let url = fullImageUrl else {
+        guard let image = imageView.image else {
                 print("Error: fullImageUrl is nil.")
                 return
             }
             let share = UIActivityViewController(
-                activityItems: [url],
+                activityItems: [image],
                 applicationActivities: nil
             )
         present(share, animated: true)

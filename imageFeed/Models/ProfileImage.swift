@@ -20,10 +20,10 @@ struct ImageSizes: Codable {
     let medium: String
     let large: String
 
-    private enum CodingKeys: String, CodingKey {
-        case small = "small"
-        case medium = "medium"
-        case large = "large"
-    }
+//    private enum CodingKeys: String, CodingKey {
+//        case small = "small"
+//        case medium = "medium"
+//        case large = "large"
+//    }
 }
 
